@@ -1,0 +1,59 @@
+NP HARD
+TSP example
+
+The simplest solution is to try all possibilities, but this is also the most time consuming and expensive method. Many solutions use heuristics, which provides probability outcomes. However, the results are approximate and not always optimal. Other solutions include branch and bound, Monte Carlo and Las Vegas algorithms.
+
+https://www.google.com/amp/s/www.techtarget.com/whatis/definition/traveling-salesman-problem%3famp=1
+
+What is traveling salesman problem (TSP)? | Definition from TechTarget
+The traveling salesman problem (TSP) is an algorithmic problem that is tasked with finding the shortest non-overlapping route that travels through all points. It is often used by computer scientists to find the most efficient route of travel for data between nodes.
+www.google.com
+
+
+TSP
+
+can you please give me an example of an np-hard problem
+
+Sure, one example of an NP-hard problem is the traveling salesman problem (TSP). In this problem, we have a set of cities and the distance between each pair of cities. The goal is to find the shortest possible route that visits each city exactly once and returns to the starting city.
+
+While the problem may seem simple, the number of possible routes grows exponentially with the number of cities, making it infeasible to brute-force. In fact, the TSP is NP-hard, which means that it is at least as hard as the hardest problems in the class NP.
+
+This means that there is no known algorithm that can solve the TSP optimally in polynomial time, but there are many heuristic and approximation algorithms that can find good solutions quickly. The TSP is a widely studied problem with many real-world applications, such as in logistics, transportation planning, and circuit board design.
+
+KNAPSACK
+
+can you please give me an example of an np-hard problem, specifically the knapsack problem
+
+Certainly! The knapsack problem is another well-known example of an NP-hard problem. In this problem, we are given a set of items, each with a weight and a value, and a knapsack with a capacity. The goal is to choose a subset of the items that maximizes the total value while keeping the total weight below or equal to the capacity of the knapsack.
+
+While the problem may seem simple, it quickly becomes difficult as the number of items increases. The knapsack problem is NP-hard, which means that it is at least as hard as the hardest problems in the class NP.
+
+This means that there is no known algorithm that can solve the knapsack problem optimally in polynomial time, but there are many heuristic and approximation algorithms that can find good solutions quickly. The knapsack problem has many real-world applications, such as in resource allocation, production planning, and finance.
+
+Knapsack diagram simple
+Greedy algorithm diagram
+
+One example of a heuristic algorithm for the knapsack problem is the greedy algorithm.
+
+The greedy algorithm starts with an empty knapsack and iteratively adds the item with the highest value-to-weight ratio that can still fit into the knapsack. This process continues until the knapsack is full or there are no more items left to add.
+
+While the greedy algorithm is not guaranteed to find the optimal solution, it is simple and efficient, and often provides a good approximation to the optimal solution. The running time of the greedy algorithm is O(n log n), where n is the number of items, which makes it practical for large problem instances.
+
+Other heuristic algorithms for the knapsack problem include genetic algorithms, simulated annealing, and tabu search, among others. These algorithms use various search and optimization techniques to explore the space of possible solutions and find good solutions quickly.
+
+TIME COMPLEXITY OF KNAPSACK
+
+The time complexity of the knapsack problem depends on the specific algorithm used to solve it.
+
+The brute-force approach to solving the knapsack problem involves considering all possible subsets of items and selecting the subset that maximizes the value while staying within the weight limit. The number of possible subsets of n items is 2^n, so the brute-force approach has an exponential time complexity of O(2^n).
+
+However, there are many more efficient algorithms for the knapsack problem that do not require considering all possible subsets. For example, dynamic programming algorithms can solve the knapsack problem in pseudo-polynomial time, which means that the running time is polynomial in the size of the input (i.e., the number of items and the knapsack capacity), but not in the value of the input.
+
+Some heuristic algorithms, such as the greedy algorithm, have a polynomial time complexity, but may not always find the optimal solution. The exact time complexity of heuristic algorithms varies depending on the algorithm used and the size of the input.
+
+Overall, the knapsack problem is an NP-hard problem, meaning that there is no known algorithm that can solve it optimally in polynomial time for all inputs
+
+Yes explain the algorithm
+
+What is NP-Hard problem
+satisfiability problem 
