@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=CityLink
+comment0.text=\r\n\ CityLink\r\n\ \r\n\ Is-a\ Vendor\r\n\ Provides\ concrete\ definitions\ of\ Vendor\ class.\r\n\ Stores\ an\ ArrayList\ of\ all\ of\ the\ trips\ this\ vendor\ offers.\r\n\ Provides\ concrete\ definitions\ of\ the\ following\ methods\:\r\n\ displayTrips()\ display\ all\ information\ of\ all\ its\ trips.\r\n\ getTrip()\ return\ a\ trip\ by\ searching\ through\ its\ ArrayList\ for\ a\ trip\ with\ a\ specific\ ID.\r\n\ makeBooking()\ make\ a\ booking,\ check\ that\ there\ are\ enough\ seats\ available.\r\n\r\n\ @author\ Maxwell\ Maia,\ 21236277\r\n\ @version\ 1.0\r\n
+comment1.params=
+comment1.target=CityLink()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ BusEireann\r\n
+comment2.params=
+comment2.target=java.lang.String\ displayTrips()
+comment3.params=id
+comment3.target=Trip\ getTrip(int)
+comment4.params=booking
+comment4.target=boolean\ makeBooking(Booking)
+comment4.text=\ Make\ a\ booking.\r\n\ Check\ that\ there\ are\ enough\ seats\ on\ trip\ to\ accommodate\ the\ booking.\r\n\ Update\ seats\ if\ there\ are\ enough\ seats\ for\ the\ booking.\r\n\ Return\ a\ boolean\ that\ is\ true\ if\ the\ booking\ was\ a\ success.\r\n
+numComments=5

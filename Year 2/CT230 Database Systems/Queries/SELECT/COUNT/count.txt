@@ -1,0 +1,9 @@
+SELECT COUNT(*) AS 'Number of essn''s working on project with name ProductY'
+FROM works_on
+WHERE pno = 
+
+(
+SELECT pnumber
+FROM project
+WHERE pname = 'ProductY'
+)

@@ -1,0 +1,12 @@
+SELECT CONCAT(fname, ' ', lname) AS 'John B Smith''s) Co-workers'
+FROM employee
+WHERE fname != 'John' AND  minit != 'B' AND lname != 'Smith' #exclude John B Smith
+AND dno = 
+
+
+
+(SELECT dno
+FROM employee
+WHERE fname = 'John' AND minit = 'B' AND lname = 'Smith')
+
+THE THING THAT IS COMMON BETWEEN THEM IS WHAT YOU SELECT IN THE NESTED SELECT.

@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=receiver
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ receiver\ here.\r\n\r\n\ @author\ Maxwell\ Maia\r\n\ \r\n
+comment1.params=a\ p\ YA
+comment1.target=receiver(long,\ long,\ long)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ receiver\r\n
+comment2.params=
+comment2.target=long\ getYB()
+comment3.params=
+comment3.target=void\ calculateK()
+comment4.params=
+comment4.target=void\ calculateYB()
+comment5.params=min\ max
+comment5.target=int\ randomInt(int,\ int)
+comment6.params=
+comment6.target=int\ generatePrivateKey()
+comment7.params=a\ X\ p
+comment7.target=long\ power(long,\ long,\ long)
+numComments=8

@@ -1,0 +1,285 @@
+---
+title: "Training Intervention Analysis"
+author: "Maxwell Luke Maia, id=21236277"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r include=FALSE}
+library(infer)
+library(tidyverse)
+library(tolerance)
+```
+
+## Context: Celtic Study
+
+A sample of 18 full-time youth soccer players from a Youth Academy performed high intensity aerobic interval training over a 10-week in-season period in addition to usual regime of soccer training and matches. 
+
+**The aim** of this study to find if this extra training improves V_IFT, the maximum velocity (km/hr) achieved in an intermittent fitness test (`VIFT_Pre` vs `VIFT_Post`)?
+
+This is a **paired design:** each player's V_IFT measured before and after the training intervention (i.e. start and after 10 weeks)
+
+A scaffold for the analysis with the response variable VO2 max is provided below. You need to rerun the analysis using the V_IFT variables (i.e. `VIFT_Pre` vs `VIFT_Post`) to answer the question of interest: is there, on average, an improvement in V_IFT?   To assess the evidence, you will provide confidence intervals, and other statistical inference,  for the mean improvement of players in the population (eg of future youth soccer players under the training intervention).
+
+
+To answer the question of interest, provide a detailed response for all of the tasks asked below using the V_IFT variables (i.e. `VIFT_Pre` vs `VIFT_Post`).
+
+
+
+Task: State the appropriate null and alternative hypotheses for the V_IFT study.
+
+
+Summary of variables and terms
+V_IFT: the maximum velocity (km/hr) achieved in an intermittent fitness test.
+
+VIFT_Pre: V_IFT before the high intensity aerobic interval training over a 10-week in-season period in addition to usual regime of soccer training and matches.
+
+VIFT_Post: V_IFT after the high intensity aerobic interval training over a 10-week in-season period in addition to usual regime of soccer training and matches.
+
+VIFT_Improvement: VIFT_Post - VIFT_Pre (the improvement in V_IFT).
+
+Training Regime: the high intensity aerobic interval training over a 10-week, in-season period in addition to usual regime of soccer training and matches.
+
+Population of interest: "youth soccer players that undergo a high intensity aerobic interval training over a 10-week-in-season period in addition to their usual regime of soccer training and matches."
+
+
+
+
+Null hypothesis: there is no change in V_IFT
+VIFT_Improvement true mean is equal to 0
+H0: µ = 0
+
+
+Alternative hypothesis: there is a change in V_IFT
+VIFT_Improvement true mean is not equal to 0
+H1: µ ≠ 0
+
+
+Task: Define a Type I and Type II error and discuss the implication of making these errors in this study.
+
+A Type I error is when we decide to reject the null hypothesis when the null hypothesis was in fact true.
+If I said that the null hypothesis was not true, I would be favouring the alternative hypothesis. i.e. I would be saying that there is difference in V_IFT after the training regime when, in fact, there is no difference in V_IFT after the training regime. This would lead people to believe that the training regime will make a difference in their V_IFT when it actually would not change their V_IFT. The implication of making a Type I error would be that people may choose to do the training routine, expecting an change in their V_IFT but no change would come.
+
+A Type II error is when I decide not to reject the null hypothesis when the alternative hypothesis is true.
+If I said that I do not have enough evidence to reject the null then I cannot say that the alternative is true. i.e. I am saying that I do not have enough evidence to say that the training regime does not not change V_IFT. But in the case of a Type II error, the truth is that the training routine does change the V_IFT. The implication of making a Type II error would be that people would think that the training does not change V_IFT when it actually does. People may choose not to do the training routine.
+
+
+## Read in the training intervention data
+
+Read in the data and have a look at the variable names and structure of the data.
+
+```{r}
+train.df <- read.csv("Training_intervention_data.csv")
+glimpse(train.df)
+```
+
+## Focus on the V_IFT response variables
+
+## Summary Statistics
+
+```{r}
+
+train.df %>% select(VIFT_Pre,VIFT_Post) %>% summary()
+
+```
+Task: Interpret!
+
+Shown above is a 5 number summary for both the V_IFT before the training and the V_IFT after the training intervention. All values of the 5 number summary are higher after the training. The maximum V_IFT has increased more than the minimum V_IFT over the training convention. The range of VIFT_Pre is 10.1. The range of VIFT_Post is 12. The mean of the V_IFT has increased from before to after the training. Therefore, our sample data indicates that there is, on average, an improvement in V_IFT of the participants in this study. Further analysis is still required to make a statement about the population of interest, all youth soccer players that undergo the training intervention, but early signs indicate that there may be an improvement, on average of V_IFT.
+There is a wide range V_IFT's. This means that this data holds information about the improvement people of a range of V_IFT's. This data is representative of people with low V_IFT and hight V_IFT.
+
+The 1st Quartile and 3rd Quartile lie near the middle of the way between the median and the minimum and the median and the the maximum respectively. The data is not heavily clumped together. 
+The median is closer to Q1 than it is to Q3. This means that most of the data lies nearer to the lower tail of the distribution. The data is skewed to the right. This is true for both the VIFT_Pre and the VIFT_Post.
+
+
+## Mean and Standard Deviation
+
+```{r}
+
+
+train.df %>% select(VIFT_Pre,VIFT_Post) %>%
+            summarize(Pre_Mean=mean(VIFT_Pre), Pre_SD= sd(VIFT_Pre),
+                      Post_Mean=mean(VIFT_Post), Post_SD= sd(VIFT_Post))
+
+
+```
+
+Task: Interpret!
+
+Standard deviation indicates the spread of the data. The standard deviation is slightly higher after the the training intervention, therefore the data is slightly more spread out. This could mean that the training intervention has caused people's V_IFT values to change by a small range of different amounts. As previously stated, the mean has increased. This indicates that there is, on average, an improvement in V_IFT of the participants in this study.
+
+## Scatterplot of Pre and Post with line of equality
+
+```{r}
+train.df %>% ggplot(aes(x = VIFT_Pre, y = VIFT_Post)) +
+        geom_point() + 
+  ggtitle("Scatterplot of Pre and Post V_IFT") +
+  ylab("Post V_IFT (km/h)") +
+  xlab("Pre V_IFT (km/h)") +
+  geom_abline(slope=1, intercept=0)
+  
+```
+
+Task: Interpret!
+
+A large majority of data points above lie above the line. This indicates that the majority of people's V_IFT's have changed after the training intervention. The distance from the line indicates the improvement or deterioration. The improvement of the people whoes V_IFT's that have improved is generally big, while the deterioration of the people whoes V_IFT's that have deteriorated is generally small.
+
+## Calculate the Improvement in V_IFT
+
+Calculate a new variable, "improvement", and have a look at the data frame to see that it has been created.  High values of VO2 max are good so Post-Pre is a better measure than Pre-Post to capture this - what about V_IFT?
+
+```{r}
+
+
+  
+train.df <- train.df %>% mutate(VIFT_Improvement = VIFT_Post-VIFT_Pre) %>%
+              glimpse()
+
+```
+
+
+## Mean and Standard Deviation of Improvement in V_IFT
+
+```{r}
+
+
+train.df %>% select(VIFT_Improvement) %>%
+            summarize(VIFT_Imp_Mean=mean(VIFT_Improvement), VIFT_Imp_SD= sd(VIFT_Improvement))
+
+```
+
+Task: Interpret!
+
+V_IFT Improvement mean is positive and not equal to 0. This shows that there is, on average an improvement in V_IFT after the training intervention of the people in this study.
+The V_IFT Improvement standard deviation is low which means that data is clustered around the mean. This shows that the improvement seen here is very close to the value of the mean (2.06). There is little variation to the improvement of V_IFT for the people in this study after the training intervention.
+
+## Boxplot of Improvement in V_IFT
+
+```{r}
+
+
+train.df %>% ggplot(aes(x = "", y = VIFT_Improvement)) +
+        geom_boxplot() + 
+  ggtitle("Boxplot of Improvement in V_IFT") +
+  ylab("Improvement in V_IFT (km/h)") +
+  xlab("") +
+  coord_flip()
+
+```
+
+Task: Interpret!
+
+The data is slightly right skewed. Most people have experienced an improvement in V_IFT (the the values for data in the whole IQR lies higher than 0). We can see that there are some people who have experienced no change in V_IFT and some people who have a experienced a deterioration in V_IFT but these people lie in the left whisker so they are not the majority of cases. In fact some people experienced a much higher improvement than the majority (the right whisker). There are no drastic outliers.
+
+## 95% Confidence Interval Using the t.test function
+
+```{r}
+
+train.df %>% select(VIFT_Improvement) %>% t.test()
+
+```
+
+Task: Based on the output given answer the following questions:
+
+* What is the mean improvement in V_IFT the population of interest? Interpret the relevant 95% Confidence Interval carefully.
+
+We are 95% confident that the value of the VIFT_Improvement of the population of interest is between 1.15 and 2.97.
+
+* Use the relevant interval estimate and p-value to decide whether there is sufficient evidence in the sample provided to claim that there is any improvement on average in V_IFT in the population of interest.
+
+The probability of observing such data (or more extreme) if the null hypothesis is true is = 0.0001736. This is significantly lower than 0.05, therefore, there is enough evidence against the null to reject the null and favour the alternative (at a 5% significance level). Therefore, the mean VIFT_Improvement of all youth soccer players under the same training intervention as the one in this study is not equal to 0. The confidence interval (1.151621, 2.970601) is relatively small and is relatively far away from the value 0. We are 95% confident that the true mean of the improvement of V_IFT lies within this confidence interval. Therefore, it is likely that the null hypothesis is not true (the value of the population mean is not equal to 0). The null is rejected and the mean improvement is positive, therefore there is improvement on average in V_IFT in the population of interest.
+
+* What are the assumptions underlying the one sample t-test presented?
+
+The data is normally distributed.
+There are no significant outliers.
+
+
+* Explain why or why not the assumptions seem justified based on the output provided.
+
+The range of the confidence interval is relatively small.
+We got a really low p-value.
+
+## 95% Bootstrap CI for the mean
+
+```{r}
+
+boot <- train.df %>%
+  specify(response = VIFT_Improvement) %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  calculate(stat = "mean")
+
+percentile_ci <- get_ci(boot)
+round(percentile_ci,2)
+
+```
+
+Task: Interpret!
+
+The confidence interval of a bootstrapped mean is the confidence interval of the true mean. Therefore, we are confident that the mean of Improvement of V_IFT in the population of interest is in the interval (1.22, 2,86).
+
+```{r}
+boot %>% visualize()+
+  shade_confidence_interval(endpoints = percentile_ci) +
+                   xlab("Bootstrap Mean") + ylab("Frequency")
+
+```
+
+Task: Interpret!
+
+This graph is the distribution of the mean of the sample data that has been bootstrapped. The end points of the highlighted section is the 95% confidence interval for this distribution. This is also the 95% confidence interval of the true mean of VIFT Improvement for the population of interest.
+
+## 95% Bootstrap CI for the median improvement
+
+```{r}
+
+boot.median <- train.df %>%
+  specify(response = VIFT_Improvement) %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  calculate(stat = "median")
+
+percentile_ci_median <- get_ci(boot.median)
+round(percentile_ci_median,2)
+
+```
+
+Task: Interpret!
+
+This is the 95% confidence interval of the bootstrapped median of the improvement of VIFT. We are 95% confident that the true median of VIFT Improvement for the population of interest lies in the interval (0.7, 3.1).
+
+```{r}
+boot.median %>% visualize()+
+  shade_confidence_interval(endpoints = percentile_ci_median) +
+                   xlab("Bootstrap Median") + ylab("Frequency")
+
+```
+
+Task: Interpret!
+
+We are using bootstrapping to allow us to get a confidence interval for the true median when we do no have the theory (e.g. CLT or T-distribution) to do so. The median is randomly sampled with replacement, that is what generated this distribution. This graph shows the end points of the 95% confidence interval of the true median of VIFT Improvement for the population of interest.
+
+## 95% Tolerance Interval (Bonus Question)
+
+Calculate a 95% tolerance interval covering 95% of V_IFT improvement values 
+
+```{r}
+
+normtol.int(train.df$VIFT_Improvement, alpha = 0.05, P = 0.95)
+
+```
+
+Task: Interpret!
+
+A tolerance interval covers a wide range of values than the confidence interval for the mean.
+I am 95% confident that at least 95% of youth players who have the training intervention will improve between -2.43 and 6.55 km/h in V_IFT.
+
+## Overall Conclusion 
+Task: state your overall conclusion. 
+
+The probability of observing such data (or more extreme) if the null hypothesis is true is = 0.0001736. This is significantly lower than 0.05, therefore, there is enough evidence against the null to reject the null and favour the alternative (at a 5% significance level). Therefore, the mean VIFT_Improvement of all youth soccer players under the training intervention is not equal to 0.
+
+The confidence interval (1.151621, 2.970601) is relatively small and is relatively far away from the value 0. We are 95% confident that the true mean of the improvement of V_IFT lies within this confidence interval. Therefore, it is likely that the null hypothesis is not true (the value of the population mean is not equal to 0). The null is rejected and the alternative is favoured. The VIFT_Improvement is not equal to 0.
+
+Furthermore, because the mean improvement is positive, there is, on average, an improvement in V_IFT among youth soccer plays that undergo this training intervention.
+

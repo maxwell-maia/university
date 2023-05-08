@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Payment
+comment0.text=\r\n\ Payment\ -\ validate\ the\ payment\ details\ and\ return\ the\ valid\ boolean.\r\n\r\n\ @author\ Maxwell\ Maia\r\n\ @version\ 1.0\r\n
+comment1.params=customer\ billingAddress\ cardType\ cardNumber\ total\ expDate\ bankName
+comment1.target=Payment(Customer,\ Address,\ java.lang.String,\ long,\ double,\ java.lang.String,\ java.lang.String)
+comment2.params=
+comment2.target=void\ validateCard()
+comment3.params=
+comment3.target=boolean\ isValid()
+numComments=4

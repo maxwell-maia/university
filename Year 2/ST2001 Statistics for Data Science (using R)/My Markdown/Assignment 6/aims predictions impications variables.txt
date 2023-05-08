@@ -1,0 +1,22 @@
+implication
+predict runner 3k running time based on blood lactate marker
+
+
+
+variables
++running time
++v4mM
++vTlac
++ Rel.14.5
++ Rel.16.1
++VO2Max
+
+
+AIM
+ predict running time (minutes) from 'blood lactate concentration 4 mmol/l' (km/hr)
+
+
+predict running time with 4mm
+
+response is running
+explanatory is 4mm

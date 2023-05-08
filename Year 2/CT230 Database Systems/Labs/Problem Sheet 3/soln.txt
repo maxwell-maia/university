@@ -1,0 +1,91 @@
+-- CT230 Problem Sheet 3 Sample Solutions
+-- Josephine Griffith
+
+-- 1. List the titles of all movies released in 2022.
+
+SELECT title
+FROM   movie
+WHERE  relYear = 2022;
+
+
+-- 2. List the names of actors with Irish nationality, ordered by surname.
+
+SELECT   fName, surname
+FROM     actor
+WHERE    nationality = 'Irish'
+ORDER BY surname;
+
+-- or
+
+SELECT   CONCAT (fName, ' ', surname) AS IrishActors
+FROM     actor
+WHERE    nationality = 'Irish'
+ORDER BY surname;
+
+-- 3. Find the number of movies which are age category 15.
+SELECT COUNT(*) AS 'Num of Category 15 movies'
+FROM   movie
+WHERE  category = '15';
+
+-- 4. Using a sub-query approach, list the names of the actors in the movie with movie ID 17.
+
+SELECT CONCAT (fName, ' ', surname) AS 'Actors in Movie with ID 17'
+FROM   actor
+WHERE  aID IN 
+       (SELECT actorID
+        FROM   stars
+        WHERE  movieID = 17);
+
+
+-- 5. List the titles and release year of movies which star the actor with actor ID 24.
+
+SELECT title, relYear
+FROM   movie
+WHERE  mID IN
+       (SELECT movieID 
+        FROM   stars
+        WHERE  actorID = 24);
+
+
+-- 6. Find the maximum rating given to a movie.
+
+SELECT MAX(rating) AS 'Max rating given to a movie'
+FROM   movie;
+
+-- 7. List the titles of movies which received greater than the average rating, order by title.
+
+SELECT title
+FROM   movie
+WHERE  rating >
+          (SELECT AVG(rating) 
+           FROM   movie)
+ORDER BY title;
+
+
+-- 8. List the names of directors whose first name begins with â€˜Aâ€™.
+
+SELECT dfName, dSurname
+FROM   director
+WHERE  dfName REGEXP '^(A)';
+
+
+-- 9. Using a sub-query approach, list the titles of movies directed by the director Quentin Tarantino
+
+SELECT title
+FROM   movie
+WHERE  mID IN
+      (SELECT movieID 
+       FROM   directs
+       WHERE  directorID = 
+             (SELECT dID 
+              FROM   director
+              WHERE  dfName = 'Quentin' AND 
+                     dSurname = 'Tarantino'));
+
+
+-- 10. For each director in the database, list the director ID, and the number of movies directed by that director if the director has directed more than one movie.
+
+SELECT    directorID, COUNT(*) AS 'Num Movies directed'
+FROM      directs
+GROUP BY  directorID
+HAVING    COUNT(*) > 1;

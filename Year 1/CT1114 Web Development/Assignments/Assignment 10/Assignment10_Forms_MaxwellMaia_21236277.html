@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <script>
+            function validateFields()
+            {
+                var qTA = document.getElementById("questionTextArea").value;
+                var yN = document.getElementById("yourName").value;
+                var yE = document.getElementById("yourEmail").value;
+
+                if(qTA == "")
+                {
+                    alert("Enter a question.");
+                }
+                else if(yN == "")
+                {
+                    alert("Enter your name.");
+                }
+                else if(!yE.includes("@") || !yE.includes("."))
+                {
+                    alert("Enter a valid email.");
+                }
+                else
+                {
+                    document.getElementById("theForm").submit();
+                }
+            }
+        </script>
+
+        <style>
+            table, td
+            {
+                border: 1px;
+                border-style:groove;
+            }
+        </style>
+
+    </head>
+    <body>
+
+        <form id="theForm" method="post" action="customer.php">
+
+            <table>
+                <tr>
+                    <td width="100px">Question Category</td>
+                    <td width="400px">
+                        <select name="questionCategory">
+                            <option value="1">Goods for Sale</option>
+                            <option value="2">Complaints</option>
+                            <option value="3">Support</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Question
+                    </td>
+                    <td>
+                        <textarea style="width:400px; height:90px;" id="questionTextArea"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Your name</td>
+                    <td>
+                        <input style="width:300px;" id="yourName">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Your email</td>
+                    <td>
+                        <input style="width:300px;" id="yourEmail">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button style="height:50px; width:140px;" onclick="validateFields();">Submit</button>
+                    </td>
+                </tr>
+            </table>
+
+        </form>
+
+    </body>
+</html>

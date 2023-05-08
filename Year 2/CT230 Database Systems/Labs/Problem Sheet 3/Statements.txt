@@ -1,0 +1,112 @@
+1. 
+
+SELECT title
+FROM movie
+WHERE relYear = 2022
+
+
+
+2.
+
+SELECT fName, surname
+FROM actor
+WHERE nationality = 'Irish'
+ORDER BY surname
+
+
+3.
+
+SELECT COUNT(*) AS 'Num_movies_cat_15'
+FROM movie
+WHERE category = 15
+
+
+4. TEST THIS ONE NO INTERNET
+
+SELECT fName, surname
+FROM actor
+WHERE aID = 
+(SELECT actorID
+FROM stars
+WHERE movieID = 17)
+
+
+5. TEST THIS ONE NO INTERNET
+
+SELECT title, relYear
+FROM movie
+WHERE mID = 
+(SELECT movieID
+FROM stars
+WHERE actorID = 24)
+;
+
+
+6. TEST THIS ONE NO INTERNET
+
+SELECT MAX(rating)
+FROM movie
+
+
+7. TEST THIS ONE NO INTERNET
+
+SELECT title
+FROM movie
+GROUP BY mID
+HAVING rating > AVG(rating)
+ORDER BY title
+
+
+8. TEST THIS ONE NO INTERNET
+
+SELECT fName, surname
+FROM director
+WHERE fName LIKE 'A%'
+
+
+9. 
+
+
+SELECT title
+FROM movie
+WHERE mID IN
+(SELECT movieID
+FROM directs
+WHERE directorID = 
+(SELECT dID
+FROM director
+WHERE dfName = 'Quentin' AND dSurname = 'Tarantino')
+)
+
+
+SELECT title
+FROM movie
+WHERE mID IN
+ (SELECT movieID
+  FROM directs
+  WHERE directorID =
+
+   (SELECT dID 
+    FROM director
+    WHERE dfName = 'Quentin' AND dSurname = 'Tarantino' ) 
+
+ )
+
+
+10. 
+
+SELECT directorID, COUNT(*) AS 'no_of_movies'
+FROM directs
+GROUP BY directorID
+HAVING COUNT(*) > 1
+
+
+Test 2
+
+By writing your own SQL code, find the number of movies that mention 'murder' in the movie's description
+
+Pick the correct answer:
+
+SELECT *
+FROM movie
+WHERE description LIKE '%murder%'

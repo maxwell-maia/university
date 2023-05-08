@@ -1,0 +1,20 @@
+preamble
+everything before \begin{document}
+
+
+
+
+nomenclature = glossary
+
+comment % single line. multi line:
+\usepackage{comment}
+
+look in slides
+
+
+Text formatting
+
+\usepackage{xcolor}
+
+
+\underlinecamer

@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=Component
+comment0.text=\r\n\ Write\ a\ description\ of\ interface\ Component\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n\ \r\n\ \r\n\ HOW\ TO\ EXTEND\ WITHOUT\ ADDING\ CODE\r\n\ INFERFACE\r\n\ can\ add\ any\ service\ class\ and\ implement\ SJNSJNS\ COmponent\ and\ it\ works\ np.\r\n
+comment1.params=
+comment1.target=double\ getCost()
+numComments=2

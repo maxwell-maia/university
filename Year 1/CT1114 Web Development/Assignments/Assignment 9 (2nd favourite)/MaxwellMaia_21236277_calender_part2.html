@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      th { background:#5555FF; }
+      .grey { background:#DDDDDD; } 
+      .day { background:#AAAAFF; } 
+      .today { background:#FFAAFF; } 
+    </style>
+  	<script>
+      //Maxwell Maia. 21236277.
+      function showCalendar() {
+        //Get user inputs
+        var year = parseInt(document.getElementById("txtYear").value);
+        var month = parseInt(document.getElementById("txtMonth").value);
+
+        //Get values needed to draw table (no. of days and starting day)
+        var noofdays = no_of_days( year, month ); 
+        var firstday = day_of_week_of_month(year, month);
+
+        //Dsraw calender
+        document.getElementById("divOutput").innerHTML = getHtmlCalendar(noofdays, firstday);
+      }
+
+      function day_of_week_of_month(year, month) //Returns first day of a month in any year since 1900. (0 to 6 = sunday to saturday)
+      {
+        //(daysElapsedSince1900)%7 will give the day. So find the days elapsed since 1900.
+
+        var daysElapsedSince1900 = 0;
+        var yearCalc = 1900; //keep track of year in loop
+
+        for(var i = 0; i<=(year-1900); i++) //count the days from 1 Jan 1900 to 1 Jan of user's input year.
+        {
+          daysElapsedSince1900 += 365+is_leap(yearCalc); //take possible leap years into account
+          yearCalc++;
+        }
+
+        for(var k = 1; k<month; k++) //count the days from 1 Jan of user's input year to the end of the month before the user's input month.
+        //AND add it to the previous count
+        {
+          daysElapsedSince1900 += no_of_days(year, k);
+        }
+
+        return (daysElapsedSince1900)%7; //this rule returns the first day
+      }
+
+      function no_of_days(year, month) //returns the number of days in any month. Also taking into account that there is 29 days in February on a leap year.
+      {
+        if(month == 9 || month == 4 || month == 6 || month == 11)
+        return 30;
+
+        if(month != 2)
+        return 31;
+ 
+        return (28+is_leap(year));
+      }
+      
+      function is_leap(year) //is the input year a leap year? return 1 if yes.
+      {
+        if(year%400==0)
+			{
+				return 1;
+			}
+
+			if(year%100==0)
+			{
+				return 0;
+			}
+			if(year%4==0)
+			{
+				return 1;
+			} 
+			return 0;
+      }
+
+      function getHtmlCalendar(noofdays, firstday) {
+        // build the 1st row of the table (fixed)
+        var html = "<table border=1><tr><th width=50>Sun</th><th width=50>Mon</th><th width=50>Tue</th><th width=50>Wed</th><th width=50>Thu</th><th width=50>Fri</th><th width=50>Sat</th></tr>";
+        
+        var currColumn = 0; // which column (=day of week) are we currently adding?
+        
+        // loop 1: add grey cells (if any) for the days of the week prior to the 1st of the month
+        html += "<tr>";
+        for (i=0; i<firstday; i++) {
+          html += "<td class='grey'></td>";
+          currColumn++;
+        }
+            
+        // loop 2: add a blue cell for each day of the month    
+        var day=1; // 'day' is the day number in the month (it's our loop counter)
+        while (day <= noofdays)
+        {
+          html += "<td class='day'>" + day + "</td>";
+          currColumn++;
+          // if we've just done a Saturday, we need to end the current row and start the next
+          if (currColumn==7) { 
+            html += "</tr><tr>"; // end row and start row
+            currColumn=0; // our next day will be a Sunday
+          }
+          day++;
+        }
+        
+        // loop 3: add grey cells (if any) for the days of the week after the last day of the month
+        // in order to neatly complete the table on a Saturday
+        if (currColumn>0) {
+          for (i=currColumn; i<7; i++)
+            html += "<td class='grey'></td>";
+        }
+        
+        // close off the final row and the table itself
+        html += "</tr></table>";
+
+        // return the result (a string) as formatted HTML
+        return html;
+      }
+  	</script>
+  <script async src='/cdn-cgi/bm/cv/669835187/api.js'></script></head>
+  <body>
+    Enter year <input id='txtYear'><br>
+    Month number <input id='txtMonth'><br>
+    <button onclick='showCalendar();'>Show Calendar</button><br>
+    <div id='divOutput'></div>
+  <script type="text/javascript">(function(){window['__CF$cv$params']={r:'6d9c0facda5d7488',m:'Isrow5NQ8IUQLY17FjZuB6ek5hYNe9FLxoZ8SgnMefI-1644231067-0-AYEOafY3jmiWKSTcZEmqWRrMVWgv4Okfg1eKe0IpcxPFRCpeMMTfERqIMTJ/9CLDgZe60ZpDXv2uCJMxTkHZmN5rAHSVMhtvXLkxrf1HwMOrVSZ9pMfFOUvgmWf2nBw3kDmalMwQE56lrJwJQuTOYL4oj79FMdMn2n9jeU7ij+g9SrbzxCYrrWCIxBehOfQOfbDVGJROomnGjT90IT2W0y5ELBuInVxGz29doGDktWTt',s:[0x661941dea9,0x2ec1f124db],}})();</script></body>
+</html>

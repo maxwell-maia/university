@@ -1,0 +1,213 @@
+---
+title: "Training Intervention Analysis"
+author: "Maxwell Luke Maia, id=21236277"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document: default
+---
+
+```{r include=FALSE}
+library(infer)
+library(tidyverse)
+library(tolerance)
+```
+
+## Context: Celtic Study
+
+A sample of 18 full-time youth soccer players from a Youth Academy performed high intensity aerobic interval training over a 10-week in-season period in addition to usual regime of soccer training and matches. 
+
+**The aim** of this study to find if this extra training improves V_IFT, the maximum velocity (km/hr) achieved in an intermittent fitness test (`VIFT_Pre` vs `VIFT_Post`)?
+
+This is a **paired design:** each player's V_IFT measured before and after the training intervention (i.e. start and after 10 weeks)
+
+A scaffold for the analysis with the response variable VO2 max is provided below. You need to rerun the analysis using the V_IFT variables (i.e. `VIFT_Pre` vs `VIFT_Post`) to answer the question of interest: is there, on average, an improvement in V_IFT?   To assess the evidence, you will provide confidence intervals, and other statistical inference,  for the mean improvement of players in the population (eg of future youth soccer players under the same training intervention).
+
+
+To answer the question of interest, provide a detailed response for all of the tasks asked below using the V_IFT variables (i.e. `VIFT_Pre` vs `VIFT_Post`).
+
+
+Task: State the appropriate null and alternative hypotheses for the V_IFT study.
+
+
+
+
+Task: Define a Type I and Type II error and discuss the implication of making these
+errors in this study.
+
+
+
+## Read in the training intervention data
+
+Read in the data and have a look at the variable names and structure of the data.
+
+```{r}
+train.df <- read.csv("Training_intervention_data.csv")
+glimpse(train.df)
+```
+
+## Focus on the V_IFT response variables
+
+## Summary Statistics
+
+```{r}
+train.df %>% select(VO2.max_Pre,VO2.max_Post) %>% summary()
+```
+Task: Interpret!
+
+## Mean and Standard Deviation
+
+```{r}
+train.df %>% select(VO2.max_Pre,VO2.max_Post) %>%
+            summarize(Pre_Mean=mean(VO2.max_Pre), Pre_SD= sd(VO2.max_Pre),
+                      Post_Mean=mean(VO2.max_Post), Post_SD= sd(VO2.max_Post))
+```
+
+Task: Interpret!
+
+## Scatterplot of Pre and Post with line of equality
+
+```{r}
+train.df %>% ggplot(aes(x = VO2.max_Pre, y = VO2.max_Post)) +
+        geom_point() + 
+  ggtitle("Scatterplot of Pre and Post VO2 Max") +
+  ylab("Post VO2 Max (ml/kg min)") +
+  xlab("Pre VO2 Max (ml/kg min)") +
+  geom_abline(slope=1, intercept=0)
+  
+```
+
+Task: Interpret!
+
+## Calculate the Improvement in V_IFT
+
+Calculate a new variable, "improvement", and have a look at the data frame to see that it has been created.  High values of VO2 max are good so Post-Pre is a better measure than Pre-Post to capture this - what about V_IFT?
+
+```{r}
+
+train.df <- train.df %>% mutate(Improvement = VO2.max_Post-VO2.max_Pre) %>%
+              glimpse()
+  
+
+
+```
+
+
+## Mean and Standard Deviation of Improvement in V_IFT
+
+```{r}
+
+train.df %>% select(Improvement) %>%
+            summarize(Imp_Mean=mean(Improvement), Imp_SD= sd(Improvement))
+
+```
+
+Task: Interpret!
+
+## Boxplot of Improvement in V_IFT
+
+```{r}
+
+
+train.df %>% ggplot(aes(x = "", y = Improvement)) +
+        geom_boxplot() + 
+  ggtitle("Boxplot of Improvement in VO2 Max") +
+  ylab("Improvement in VO2 Max (ml/kg min)") +
+  xlab("") +
+  coord_flip()
+
+```
+
+Task: Interpret!
+
+
+## 95% Confidence Interval Using the t.test function
+
+```{r}
+
+train.df %>% select(Improvement) %>% t.test()
+
+```
+
+Task: Based on the output given answer the following questions:
+
+* What is the mean improvement in V_IFT the population of interest? Interpret the relevant 95% Confidence Interval carefully.
+
+* Use the relevant interval estimate and p-value to decide whether there is sufficient evidence in the sample provided to claim that there is any improvement on average in V_IFT in the population of interest.
+
+* What are the assumptions underlying the one sample t-test presented?
+
+* Explain why or why not the assumptions seem justified based on the output provided.
+
+## 95% Bootstrap CI for the mean
+
+```{r}
+
+boot <- train.df %>%
+  specify(response = Improvement) %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  calculate(stat = "mean")
+
+percentile_ci <- get_ci(boot)
+round(percentile_ci,2)
+
+```
+
+Task: Interpret!
+
+```{r}
+boot %>% visualize()+
+  shade_confidence_interval(endpoints = percentile_ci) +
+                   xlab("Bootstrap Mean") + ylab("Frequency")
+
+```
+
+Task: Interpret!
+
+## 95% Bootstrap CI for the median improvement
+
+```{r}
+
+boot.median <- train.df %>%
+  specify(response = Improvement) %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  calculate(stat = "median")
+
+percentile_ci_median <- get_ci(boot.median)
+round(percentile_ci_median,2)
+
+```
+
+Task: Interpret!
+
+```{r}
+boot.median %>% visualize()+
+  shade_confidence_interval(endpoints = percentile_ci_median) +
+                   xlab("Bootstrap Median") + ylab("Frequency")
+
+```
+
+Task: Interpret!
+
+
+
+## 95% Tolerance Interval (Bonus Question)
+
+Calculate a 95% tolerance interval covering 95% of V_IFT improvement values 
+
+```{r}
+
+normtol.int(train.df$Improvement, alpha = 0.05, P = 0.95)
+
+```
+
+Task: Interpret!
+
+
+## Overall Conclusion 
+Task: state your overall conclusion. 
+
+
+ 
+
+
+

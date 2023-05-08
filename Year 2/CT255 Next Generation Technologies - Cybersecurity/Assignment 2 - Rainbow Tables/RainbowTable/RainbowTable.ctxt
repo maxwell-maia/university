@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=RainbowTable
+comment0.text=\ \ CT255\ Assignment\ 2\r\n\ \ This\ class\ provides\ functionality\ to\ build\ rainbow\ tables\ (with\ a\ different\ reduction\ function\ per\ round)\ for\ 8\ character\ long\ strings,\ which\r\n\ \ \ \ consist\ of\ the\ symbols\ "a\ ..\ z",\ "A\ ..\ Z",\ "0\ ..\ 9",\ "\!"\ and\ "\#"\ (64\ symbols\ in\ total).\r\n\ \ \ \ Properly\ used,\ it\ creates\ the\ following\ value\ pairs\ (start\ value\ -\ end\ value)\ after\ 10,000\ iterations\ of\ hashFunction()\ and\ reductionFunction()\:\r\n\ \ \ \ \ \ \ \ \ \ start\ value\ \ -\ \ end\ value\r\n\ \ \ \ \ \ \ \ \ \ Kermit12\ \ \ \ \ \ \ \ lsXcRAuN\r\n\ \ \ \ \ \ \ \ \ \ Modulus\!\ \ \ \ \ \ \ \ L2rEsY8h\r\n\ \ \ \ \ \ \ \ \ \ Pigtail1\ \ \ \ \ \ \ \ R0NoLf0w\r\n\ \ \ \ \ \ \ \ \ \ GalwayNo\ \ \ \ \ \ \ \ 9PZjwF5c\r\n\ \ \ \ \ \ \ \ \ \ Trumpets\ \ \ \ \ \ \ \ \!oeHRZpK\r\n\ \ \ \ \ \ \ \ \ \ HelloPat\ \ \ \ \ \ \ \ dkMPG7\!U\r\n\ \ \ \ \ \ \ \ \ \ pinky\#\#\!\ \ \ \ \ \ \ \ eDx58HRq\r\n\ \ \ \ \ \ \ \ \ \ 01\!19\!56\ \ \ \ \ \ \ \ vJ90ePjV\r\n\ \ \ \ \ \ \ \ \ \ aaaaaaaa\ \ \ \ \ \ \ \ rLtVvpQS\r\n\ \ \ \ \ \ \ \ \ \ 036abgH\#\ \ \ \ \ \ \ \ klQ6IeQJ\r\n\ \ \ \ \ \ \ \ \ \ \r\n\ \ \ \ \ \ \ \ \ \ \r\n\r\n\ @author\ Michael\ Schukat\r\n\ @version\ 1.0\r\n
+comment1.params=
+comment1.target=RainbowTable()
+comment1.text=\r\n\ Constructor,\ not\ needed\ for\ this\ assignment\r\n
+comment2.params=args
+comment2.target=void\ main(java.lang.String[])
+comment3.params=s
+comment3.target=long\ hashFunction(java.lang.String)
+comment4.params=val\ round
+comment4.target=java.lang.String\ reductionFunction(long,\ int)
+numComments=5

@@ -1,0 +1,1 @@
+FSM: Definition and History [7/10] Illustrated Example and Description [10/10] Three Example Uses of FSMs [9/9] Mealy vs Moore with example [8/10] Advantage of one over another [6/6] FSM Specification [10/10] State Table [10/10] State Diagram [10/10] Karnaugh Map [4/8] Next State Logic [8/8] Overall Structure [4/4] References [5/5] -------- Grade [91/100] Final Mark [9.1/10]

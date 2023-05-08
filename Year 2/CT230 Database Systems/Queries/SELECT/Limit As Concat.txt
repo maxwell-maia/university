@@ -1,0 +1,5 @@
+SELECT salary, CONCAT(fname, ' ', lname) AS Name
+FROM employee
+WHERE dno = 5
+ORDER BY lname
+LIMIT 3

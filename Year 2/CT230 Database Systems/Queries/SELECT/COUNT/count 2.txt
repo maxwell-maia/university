@@ -1,0 +1,10 @@
+SELECT COUNT(*)
+FROM dependent
+WHERE relationship != 'spouse'
+AND essn = 
+
+(
+SELECT ssn 
+FROM employee
+WHERE fname = 'John'
+)

@@ -1,0 +1,3 @@
+SELECT CONCAT(fname, ' ', minit, ' ', lname) AS name
+FROM employee
+WHERE address LIKE '%Houston%'

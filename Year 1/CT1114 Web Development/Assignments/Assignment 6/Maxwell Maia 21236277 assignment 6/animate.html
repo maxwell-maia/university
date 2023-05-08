@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <script>
+
+            function danceBaby()
+            {
+                var x = Math.random()*600;
+                var y = Math.random()*500;
+
+                document.getElementById("divSkeleton").style.left = x+"px";
+                document.getElementById("divSkeleton").style.top = y+"px";           
+            }
+
+        </script>
+    </head>
+
+    <body>
+        <div id="divSkeleton" style="position:absolute; left:50px; top:100px" onclick="danceBaby();">
+            <img src="mc_skeleton2.png">
+        </div>
+    </body>
+</html>

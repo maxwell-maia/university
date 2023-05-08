@@ -1,0 +1,118 @@
+SELECT *
+FROM movies
+
+
+
+1.
+
+list names of movies released in 2004.
+
+
+
+SELECT name
+FROM movies
+WHERE year = 2004
+
+
+
+movies
+pi name (sigma year = 2004 movies)
+
+CORRECT
+
+
+2.
+
+rel year of movie called "Shining, The"
+
+SELECT year
+FROM movies
+WHERE name = 'Shining, The'
+
+
+res1 = movies
+res2 = sigma name = 'Shining, The' res1
+res3 = pi year res2
+res3
+
+
+
+3.
+
+genres of the movie called 'Four Rooms'
+
+
+SELECT genre
+FROM movies_genres INNER JOIN movies
+ ON movies.id = movies_genres.movie_id
+
+WHERE name = 'Four Rooms'
+
+
+
+
+res1 = movies_genres ⨝ movies.id = movies_genres.movie_id movies
+res2 = sigma name = 'Four Rooms' res1
+res3 = pi genre res2
+
+res3
+
+
+
+4. 
+
+names of movies that star the actor Joe Farago
+
+
+SELECT name
+FROM (movies INNER JOIN roles ON id = movie_id)
+ INNER JOIN actors ON actor_id = actors.id
+
+WHERE first_name = 'Joe' AND last_name = 'Farago'
+
+
+res1 = movies ⨝ id = movie_id roles
+res2 = res1 ⨝ actor_id = actors.id actors
+res3 = sigma first_name = 'Joe' and last_name = 'Farago' res2
+res4 = pi name res3
+res4
+
+
+
+
+5. 
+
+genres of movies where year < 1995 and rank > 8
+
+SELECT genre
+FROM movies_genres INNER JOIN movies
+ on movie_id = id
+
+WHERE year < 1995 AND rank > 8
+
+
+
+pi genre (sigma year < 1995 and rank > 8 (movies_genres ⨝ movie_id = id movies))
+
+
+res1 = movies_genres ⨝ movie_id = id movies
+res2 = sigma year < 1995 and rank > 8 res1
+res3 = pi genre res2
+
+res3
+
+
+
+Do with a canonical tree
+
+7. 
+
+Find the director of the movie with the name "Four Rooms".
+
+SELECT first_name, last_name
+FROM (directors INNER JOIN movies_directors
+ ON director_id = directors.id) INNER JOIN movies
+ ON movies.id = movie_id
+WHERE name = 'Four Rooms'
+
+

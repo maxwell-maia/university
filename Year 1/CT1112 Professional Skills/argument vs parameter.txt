@@ -1,0 +1,9 @@
+parameter is the "a" variable
+function(int a)
+{
+ do something
+}
+
+
+argument is the "21"
+this.function(21)

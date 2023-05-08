@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=Car
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Car\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=Car()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Car\r\n
+comment2.params=fuel
+comment2.target=void\ setFuel(double)
+comment3.params=distance
+comment3.target=boolean\ move(double)
+comment3.text=\r\n\ The\ move\ method\ is\ called\ whenever\ a\ Car\ object\ is\ required\ to\ move\r\n\r\n\ @param\ \ distance\ \ \:\ the\ distance\ the\ car\ wishes\ to\ move\r\n\ @return\ \ \ boolean\:\ true\ or\ false\ based\ on\ whethe\ the\ car\ moved\ or\ not\r\n
+comment4.params=
+comment4.target=void\ printState()
+numComments=5

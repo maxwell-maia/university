@@ -1,0 +1,31 @@
+body
+{
+background-color: lightsalmon;
+font-family: inherit, sans-serif;
+font-size:40px;
+}
+
+.heading
+{
+font-size:122px;
+}
+
+.mediumtext
+{
+font-size:26px;
+font-family: fastasy, sans-serif;
+}
+
+a:link {color:white;}
+a:visited {color:white;}
+a:hover {color:green;}
+a:active {color:pink;}
+
+.vertical-center
+{
+margin: 0;
+position: absolute;
+top: 50%;
+-ms-transform: translateY(-50%);
+transform: translateY(-50%);
+}

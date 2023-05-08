@@ -1,0 +1,156 @@
+questions
+
+1. 
+SELECT genre
+FROM movie INNER JOIN genres
+ ON  movie.mID = genres.movieID
+WHERE title = "Belfast"
+
+
+2.
+SELECT title, relYear
+FROM (actor INNER JOIN stars
+ ON   aID = actorID)
+ INNER JOIN movie
+ ON movieID = mID
+WHERE fName = "Saoirse" AND surname = "Ronan"
+
+
+3. 
+SELECT DISTINCT actor.fName, actor.surname
+FROM actor, movie, stars
+WHERE  (SELECT mID
+	FROM movie
+	WHERE title = "Spiderman No way home")
+	= stars.movieID
+AND     stars.actorID = actor.aID
+
+
+4. *explicit join*
+SELECT title, relYear, description
+FROM (director INNER JOIN directs
+     ON dID = directorID) INNER JOIN
+     movie
+     ON mID = movieID
+WHERE dfName = "Anthony" AND dSurname = "Russo"
+
+*implicit join*
+SELECT title, relYear, description
+FROM director, directs, movie
+WHERE mID = movieID
+AND dID = directorID
+AND dfName = "Anthony" AND dSurname = "Russo"
+
+
+5. union. (select) union (select)
+* Find 2 selects
+titles of movies directed by quin
+SELECT title
+FROM movie
+WHERE mID IN
+(SELECT movieID
+FROM directs
+WHERE directorID = 
+(SELECT dID
+FROM director
+WHERE dfName = "Quentin"
+ AND dSurname = "Tarantino"
+)
+)
+
+
+titles of movies starring quin
+SELECT title
+FROM movie
+WHERE mID IN
+(SELECT movieID
+FROM stars
+WHERE actorID = 
+(SELECT aID
+FROM actor
+WHERE fName = "Quentin"
+ AND surname = "Tarantino"
+)
+)
+
+*Put a UNION between them
+
+ANSWER :
+(SELECT title
+FROM movie
+WHERE mID IN
+(SELECT movieID
+FROM directs
+WHERE directorID = 
+(SELECT dID
+FROM director
+WHERE dfName = "Quentin"
+ AND dSurname = "Tarantino"
+)
+))
+UNION
+(
+SELECT title
+FROM movie
+WHERE mID IN
+(SELECT movieID
+FROM stars
+WHERE actorID = 
+(SELECT aID
+FROM actor
+WHERE fName = "Quentin"
+ AND surname = "Tarantino"
+)
+)
+)
+
+8.
+
+SELECT fName, COUNT(*)
+FROM stars INNER JOIN actor
+ ON aID = actorID
+GROUP BY fName
+HAVING COUNT(*) > 2
+
+
+9.
+
+SELECT COUNT(*), AVG(rating)
+FROM genres INNER JOIN movie
+ ON mID = movieID
+GROUP BY genre
+HAVING COUNT(*) > 5
+
+10. I think its the same as the lab question.
+This is the test question.
+
+wrong answer maybe
+This one is wrong.
+SELECT dfName, dSurname, fName, surname
+FROM (((movie INNER JOIN directs ON movieID = mID) INNER JOIN director ON dID = directorID) INNER JOIN stars ON movieID = mID) INNER JOIN actor ON actorID = aID
+WHERE title = "Don't Look Up"
+
+
+
+
+right answerscopy
+This one is wrong.
+(
+SELECT dfName, dSurname
+FROM (movie INNER JOIN directs ON directs.movieID = mID) INNER JOIN director ON dID = directorID
+WHERE title = "Don't Look Up"
+)
+
+UNION
+
+(
+SELECT fName, surname
+FROM (movie INNER JOIN stars ON stars.movieID = mID) INNER JOIN actor ON aID = stars.movieID
+WHERE title = "Don't Look Up"
+)
+
+LOL RIGHT ANSWER WAS IN ME
+This one is right. concat is optional
+SELECT CONCAT (dfName, " ", dSurname) AS director, CONCAT (fName, " ", surname) AS actor
+FROM (((movie INNER JOIN directs ON directs.movieID = mID) INNER JOIN director ON dID = directorID) INNER JOIN stars ON stars.movieID = mID) INNER JOIN actor ON actorID = aID
+WHERE title = "Don't Look Up"

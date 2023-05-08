@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Booking
+comment0.text=\r\n\ Booking\r\n\ \r\n\ Store\ and\ allow\ retrieval\ of\ information\ about\ a\ booking\r\n\ Calculates\ the\ total\ cost\ of\ a\ booking\r\n\r\n\ @author\ Maxwell\ Maia\r\n\ @student\ id\ 21236277\r\n\ @version\ 1.0\r\n
+comment1.params=trip\ requestedSeats
+comment1.target=Booking(Trip,\ int)
+comment2.params=
+comment2.target=Trip\ getTrip()
+comment3.params=
+comment3.target=int\ getRequestedSeats()
+comment4.params=
+comment4.target=double\ getTotalCost()
+numComments=5

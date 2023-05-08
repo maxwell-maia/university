@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Address
+comment0.text=\r\n\ Address\ -\ set\ and\ retrieve\ information\ about\ an\ Address.\r\n\r\n\ @author\ Maxwell\ Maia\r\n\ @version\ 1.0\r\n
+comment1.params=street\ town\ county\ country\ postcode
+comment1.target=Address(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getStreet()
+comment3.params=
+comment3.target=java.lang.String\ toString()
+numComments=4

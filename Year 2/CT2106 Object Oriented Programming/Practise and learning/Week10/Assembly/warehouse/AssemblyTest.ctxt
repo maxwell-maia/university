@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=AssemblyTest
+comment0.text=\r\n\ AssemblyTest\ is\ used\ to\ write\ test\ code\r\n\ for\ the\ Assembly\ Part\ classes.\r\n\ @author\ (conor\ hayes)\r\n\ @version\ (Nov\ 2nd)\r\n
+comment1.params=
+comment1.target=void\ partTest()
+comment2.params=
+comment2.target=void\ costTest()
+comment3.params=
+comment3.target=void\ costTestv2()
+comment4.params=args
+comment4.target=void\ main(java.lang.String[])
+numComments=5

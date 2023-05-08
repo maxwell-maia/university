@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=Engine
+comment0.text=\r\n\ \r\n\ This\ is\ the\ engine\ class.\ The\ engine\ is\ composed\ of\ a\ wheel.\r\n\r\n\ @author\ Maxwell\ Maia\r\n\ @version\ 2.1\r\n
+comment1.params=name\ tpl\ wheelName\ radius
+comment1.target=Engine(java.lang.String,\ double,\ java.lang.String,\ double)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Engine\r\n
+comment10.params=
+comment10.target=double\ getWheelCircumference()
+comment2.params=fuel
+comment2.target=void\ setFuel(double)
+comment3.params=
+comment3.target=double\ getFuel()
+comment4.params=
+comment4.target=java.lang.String\ getName()
+comment5.params=
+comment5.target=double\ getTpl()
+comment6.params=
+comment6.target=int\ getTotalNumTurns()
+comment7.params=turns
+comment7.target=double\ turnWheelCalcDistance(double)
+comment8.params=
+comment8.target=java.lang.String\ getWheelName()
+comment9.params=
+comment9.target=double\ getWheelRadius()
+numComments=11

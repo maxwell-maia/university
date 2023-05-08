@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Email
+comment0.text=\r\n\ Email\ -\ Compiles\ information\ to\ send\ an\ email\ (print\ to\ terminal).\r\n\r\n\ @author\ Maxwell\ Maia\r\n\ @version\ 1.0\r\n
+comment1.params=order
+comment1.target=Email(Order)
+comment2.params=
+comment2.target=void\ success()
+comment3.params=
+comment3.target=void\ regret()
+numComments=4

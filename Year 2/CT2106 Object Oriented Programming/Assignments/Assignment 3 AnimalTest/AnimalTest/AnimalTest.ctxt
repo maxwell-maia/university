@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=AnimalTest
+comment0.text=\r\n\ @author\ Maxwell\ Maia\r\n\ Class\ used\ to\ test\ the\ program.\r\n
+comment1.params=
+comment1.target=AnimalTest()
+comment2.params=args
+comment2.target=void\ main(java.lang.String[])
+comment3.params=
+comment3.target=void\ testToString()
+comment4.params=
+comment4.target=void\ testEquals()
+comment5.params=
+comment5.target=void\ testMove()
+numComments=6

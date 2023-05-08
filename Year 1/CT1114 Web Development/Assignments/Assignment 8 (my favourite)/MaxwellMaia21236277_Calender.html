@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <style>
+            table, td
+            {
+                border: 1px solid yellow;
+                background-color: rgb(152, 72, 243);
+                border-color: yellow;
+                padding: 2px;
+            }
+
+        </style>
+
+
+        <script>
+            //Maxwell Maia. 21236277.
+            
+            var day;
+            var dayMonth;
+            var txt;
+
+            function setCalender()
+            {
+                //Get today's day
+                date = new Date();
+                var today = date.getDate();
+
+                //Read in user's inputs
+                day = document.getElementById("dayIn").value;
+                dayMonth = document.getElementById("dayMonthIn").value;
+
+
+                if(!isNaN(day) && day != "" && day <= 6 && day >= 0) //check that the "day" is valid
+                {
+                    if(!isNaN(dayMonth) && dayMonth != "") //check that the "days of month" is also valid
+                    {
+                        //start constructing a table. This part is the top row.
+                        txt="<table><tr><td style=\"width: 30px;\">Sun</td><td style=\"width: 30px;\">Mon</td><td style=\"width: 30px;\">Tue</td><td style=\"width: 30px;\">Wed</td><td style=\"width: 30px;\">Thu</td><td style=\"width: 30px;\">Fri</td><td style=\"width: 30px;\">Sat</td></tr>";
+                        
+
+                            var i = 1; //counter to count the day of the month we are working on
+                            var j = 0; //counter to keep track of the day the of week we are working on
+
+                            // The next segment of code will be adding to the txt variable, (continue to contruct table).
+                            while(i <= dayMonth) //loop until after we have worked on the last day of the month
+                            {
+                                if(i==1) //will only run once at the start. Add the gray squares before the first day in calender.
+                                {
+                                    for(var k = 0; k < day; k++)
+                                    {
+                                        txt+="<td style=\"background-color: rgb(161, 165, 167);\"> </td>";
+                                        j++; //every time we increment j, we are counting the days of the week.
+                                    }
+                                }
+                                
+                                if(j == 7) //once j is 7, the counter for the week needs to go to 0 AND a new row is added.
+                                {
+                                    txt+="</tr><tr>";
+                                    j=0;
+                                }
+
+                                if(i == today) //Add a gold square instead for today's day on calender.
+                                {
+                                    txt+="<td style=\"background-color: rgb(247, 204, 113);\">"+i+"</td>";
+                                }
+                                else //blue sqaure for normal day that isn't today.
+                                {
+                                    txt+="<td style=\"background-color: rgb(83, 206, 255);\">"+i+"</td>";
+                                }
+                                i++; //increment so that the next day can be worked on.
+                                j++; //keep track of day of week.
+                            }
+
+                            //Add the last few gray squares (if any).
+                            for(var m = 0; m < (7-j); m++)
+                            {
+                                txt+="<td style=\"background-color: rgb(161, 165, 167);\"> </td>";
+                            }
+
+
+                        txt+="</table>"; //complete the table
+                        document.getElementById("output").innerHTML = txt; //apply the table to inner html to be displayed.
+                    }
+                    else //if the input was invalid show error.
+                    {
+                        alert("Days in the month entered is not a valid number. Please try again.");
+                    }
+                }
+                else //if the input was invalid show error.
+                {
+                    alert("Day of the week of the first day of the month entered is not a valid number. Please try again.");
+                }
+                
+            }
+
+        </script>
+
+    </head>
+    <body>
+        Enter the day of the week (0-6) of the first day of the month: 
+        <input size=25 id="dayIn" type="text" name="day"><br>
+        Enter the number of days in the month: 
+        <input size=25 id="dayMonthIn" type="text" name="dayMonth">
+
+        <div id="output"></div>
+
+        <button onclick="setCalender()">
+            Set calender
+        </button>
+    </body>
+
+</html>

@@ -1,0 +1,101 @@
+1. without join
+
+SELECT dependent_name, bdate
+FROM dependent
+WHERE relationship != 'spouse'
+ AND essn = 
+  (SELECT ssn
+   FROM employee
+   WHERE fname = 'Franklin' 
+    AND minit = 'T'
+    AND lname = 'Wong');
+
+
+2. with implicit join
+
+SELECT dependent_name, dependent.bdate, address
+FROM employee, dependent
+WHERE employee.ssn = dependent.essn
+      AND relationship != 'spouse'
+      AND fname = 'Franklin'
+      AND minit = 'T'
+      AND lname = 'Wong';
+
+
+3. with explicit join
+
+SELECT dependent_name, dependent.bdate, address
+FROM employee INNER JOIN dependent
+ON ssn = essn
+
+WHERE relationship != 'spouse'
+      AND fname = 'Franklin'
+      AND minit = 'T'
+      AND lname = 'Wong';
+
+
+4. join multiple tables
+
+
+SELECT pnumber, dname, lname, address, bdate
+FROM (
+      project
+
+ALL OF THE PROJECTS
+
+LINKED WITH ALL OF THEIR DEPARMENT NAMES
+      INNER JOIN department
+      ON project.dnum = department.dnumber
+     )
+
+LINKED WITH THE MANAGER DETAILS WHERE THE DEPARTMENT IN THE ABOVE TABLE HAS A MGRSSN THAT IS THE MGRSSN OF A EMPLOYEE TABLE
+     INNER JOIN employee
+     ON department.mgrssn = employee.ssn
+
+ONLY SHOWING PROJECT WITH PLOCATION = 'Stafford'
+WHERE plocation = 'Stafford'
+
+
+3. 
+SELECT CONCAT(fname, ' ', minit, ' ', lname) AS 'Employee', address
+
+FROM employee, department
+
+WHERE employee.dno = department.dnumber
+ AND  dname = 'Administration';
+
+
+SELECT CONCAT(fname, ' ', minit, ' ', lname) AS 'Employee', address
+
+FROM employee RIGHT JOIN department
+ ON  dno = dnumber
+WHERE dname = 'Administration';
+
+
+SELECT *
+FROM employee INNER JOIN department
+ ON  ssn = mgrssn;
+
+
+SELECT e.fname AS Employee, s.fname AS Supervisor
+FROM employee AS e, employee AS s;
+
+
+SELECT e.fname AS Employee, s.fname AS Supervisor
+FROM employee AS e INNER JOIN employee AS s
+ ON  e.superssn = s.ssn;
+
+
+
+next day.
+
+45***
+
+
+46.
+
+SELECT pname, COUNT(*) AS numEmps
+FROM project INNER JOIN works_on
+ ON pnumber = pno
+GROUP BY pname
+HAVING COUNT(*) > 1

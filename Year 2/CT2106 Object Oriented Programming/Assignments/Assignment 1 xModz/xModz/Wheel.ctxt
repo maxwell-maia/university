@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Wheel
+comment0.text=\r\n\ This\ is\ the\ wheel\ class.\ The\ wheel\ is\ not\ composed\ of\ any\ objects.\r\n\r\n\ @author\ Maxwell\ Maia\r\n\ @version\ 1.1\r\n
+comment1.params=name\ radius
+comment1.target=Wheel(java.lang.String,\ double)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Wheel\r\n
+comment2.params=turns
+comment2.target=double\ turn(double)
+comment3.params=
+comment3.target=java.lang.String\ getName()
+comment4.params=
+comment4.target=double\ getRadius()
+comment5.params=
+comment5.target=double\ getCircumference()
+numComments=6

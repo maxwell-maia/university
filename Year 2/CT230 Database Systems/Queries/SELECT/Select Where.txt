@@ -1,0 +1,14 @@
+SELECT ssn
+FROM `employee`
+WHERE fname = 'Joyce' AND minit = 'A'
+AND lname = 'English'
+
+SELECT address, bdate
+FROM employee
+WHERE fname = 'John' AND minit = 'B' AND lname = 'Smith'
+
+SELECT ssn, CAST(salary/12.0 AS DECIMAL(8, 2))
+AS monthlySalary
+FROM employee
+
+Distinct remove duplicates

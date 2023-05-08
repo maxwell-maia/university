@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Vendor
+comment0.text=\r\n\ Vendor\r\n\ \r\n\ Provides\ function\ definitions\ that\ each\ vendor\ has\ to\ use\r\n\ \r\n\ @author\ Maxwell\ Maia\r\n\ @student\ id\ 21236277\r\n\ @version\ 1.0\r\n
+comment1.params=
+comment1.target=java.lang.String\ displayTrips()
+comment2.params=id
+comment2.target=Trip\ getTrip(int)
+comment3.params=booking
+comment3.target=boolean\ makeBooking(Booking)
+numComments=4

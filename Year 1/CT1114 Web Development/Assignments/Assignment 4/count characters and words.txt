@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function updateRequest()
+            {
+                var output = " ";
+                var numCharsFinal = 0;
+                var numWords = 0;
+
+
+                var textInput = document.getElementById("textUserInput").value;
+                var numChars = textInput.length;
+
+                
+
+                for(var i = 0; i < numChars; i++)
+                {
+
+                    var currLetter = textInput.substr(i,1);
+                    if (currLetter != " ")
+                    {
+                        numCharsFinal++;
+                    }
+                    if (currLetter != " " && textInput.substr(i-1,1) == " ")
+                    {
+                        numWords++;
+                    }
+
+                    output = numCharsFinal + " characters.<br>"+numWords+" words.";
+
+                }
+                
+                document.getElementById("myParagraph").innerHTML = output;
+            }
+
+        </script>
+    </head>
+    <body>
+        <textarea id='textUserInput' onkeyup='updateRequest();' value ="Type your text here"></textarea>
+    </body>
+    <br>
+    <p id='myParagraph'>
+        Your output will appear here
+    </p>
+</html>

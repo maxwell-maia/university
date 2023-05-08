@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Engine
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Engine\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=kpg
+comment1.target=Engine(double)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Engine\r\n
+comment2.params=fuel
+comment2.target=void\ setFuel(double)
+comment3.params=
+comment3.target=double\ getFuel()
+comment4.params=distance
+comment4.target=boolean\ go(double)
+comment4.text=\r\n\ go\ method\ of\ the\ engine\ calculates\ the\ amount\ of\ fuel\ needed\ to\ go\r\n\ the\ distance\ required.\ It\ updates\ the\ fuel\ variable\ based\ on\ this\ calculation.\r\n\ It\ returns\ false\ if\ the\ updated\ fuel\ calculation\ is\ less\ than\ zero.\ \r\n\ This\ is\ a\ rough\ and\ ready\ way\ to\ determine\ if\ the\ fuel\ level\ can\ accomodate\ the\ distance\ required.\r\n\ Can\ you\ do\ better\ ?\ For\ example,\ if\ there\ was\ fuel\ for\ 5\ km,\ but\ the\ distance\ variable\ was\ 10km\r\n\ perhaps\ this\ method\ should\ return\ the\ distance\ that\ could\ be\ travelled,\ rather\r\n\ than\ returning\ false.\r\n\r\n\ @param\ \ distance\ \ \:\ the\ distance\ required\ to\ travel\ \r\n\ @return\ \ true\ or\ false\ based\ on\ whether\ it\ is\ possible\ or\ not\r\n
+comment5.params=
+comment5.target=double\ getRange()
+comment5.text=\r\n\ getRange\ method\ of\ the\ engine\ calculates\ the\ distance\ that\ this\ engine\ can\ accommodate\ based\r\n\ the\ remaining\ fuel\ available\r\n\r\n\ \r\n\ @return\ the\ distance\ the\ Engine\ can\ accommodate\ based\ on\ the\ remaining\ fuel\r\n
+numComments=6

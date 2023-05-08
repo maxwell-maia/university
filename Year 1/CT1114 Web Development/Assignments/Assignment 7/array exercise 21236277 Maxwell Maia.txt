@@ -1,0 +1,64 @@
+<html>
+    <head>
+
+        <script>
+
+            var numArr = [];
+            var size = 0; //size of array. counting from 0.
+            var txtOut = "";
+            var txtList = "";
+
+            var highest = 0;
+            var lowest = 1000;
+            var sum = 0;
+
+            function generateList()
+            {
+
+                for (i = 0; i<100; i++)
+                {
+                    //generate a random number
+                    randomNumber = Math.floor(Math.random()*1000);
+                    numArr.push(randomNumber); //add number to array
+
+                    //highest, lowest, sum
+                    if(randomNumber > highest)
+                    {
+                        highest = randomNumber;
+                    }
+                    if(randomNumber < lowest)
+                    {
+                        lowest = randomNumber;
+                    }
+                    sum+=randomNumber;
+                }
+
+                size = i; //store size of array in case I need it
+
+                //sum average largest smallest paragraph
+                txtOut = "Sum: "+sum+"<br>Average: "+(sum/100)+"<br>Largest: "+highest+"<br>Smallest: "+lowest;
+                document.getElementById("pOutput").innerHTML = txtOut;
+
+                //create comma list
+                for(j = 0; j<size;j++)
+                {
+                    txtList += numArr[j] + ", ";
+                }
+                document.getElementById("pList").innerHTML = txtList;
+
+
+                
+            }
+
+        </script>
+
+    </head>
+    <body onload="generateList()">
+        <p id="pOutput">
+
+        </p>
+
+        <br>
+        <p id="pList"></p>
+    </body>
+</html>

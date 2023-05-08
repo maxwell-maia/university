@@ -1,0 +1,31 @@
+<html>
+    <heading>
+        <title>
+            Cycling images
+        </title>
+
+        <script>
+
+            var position = 1;
+
+            function clickPicture()
+            {
+                document.getElementById("mainPicture").src="http://www.psychicsoftware.com/ct1113/banner-image-"+position+".png";
+                position++;
+
+                if (position >= 7)
+                {
+                    position = 1;
+                }
+            }
+
+
+        </script>
+
+    </heading>
+
+    <body>
+        <img id='mainPicture' src="http://www.psychicsoftware.com/ct1113/banner-image-1.png" onclick="clickPicture();">
+        
+    </body>
+</html>

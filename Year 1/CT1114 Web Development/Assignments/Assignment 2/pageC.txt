@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>
+            Page C (absolutely beautiful)
+        </title>
+    </head>
+    <body>
+        This is page 'C'. 
+        You can visit all of my beautiful pages below:<br>
+
+        <a href="pageA.html">
+            Page A<br>
+        </a>
+
+        <a href="pageB.html">
+            Page B<br>
+        </a>
+
+        <a href="pageC.html">
+            Page C<br>
+        </a>
+    </body>
+</html>

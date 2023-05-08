@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=CatalogueEntry
+comment1.params=name\ number\ cost
+comment1.target=CatalogueEntry(java.lang.String,\ long,\ double)
+comment2.params=
+comment2.target=java.lang.String\ getName()
+comment3.params=
+comment3.target=long\ getNumber()
+comment4.params=
+comment4.target=double\ getCost()
+numComments=5

@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Ostrich
+comment1.params=name
+comment1.target=Ostrich(java.lang.String)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Ostrich\r\n//
+comment2.params=
+comment2.target=java.lang.String\ toString()
+comment2.text=\r\n\ toString\ method\ returns\ a\ String\ representation\ of\ the\ bird\r\n\ What\ superclass\ has\ Ostrich\ inherited\ this\ method\ from?\ java.lang.Object\r\n
+comment3.params=obj
+comment3.target=boolean\ equals(java.lang.Object)
+comment3.text=\r\n\ Equals\ method\ for\ leaf\ class.\r\n\ This\ method\ defines\ what\ makes\ Ostrich\ objects\ equal\r\n\ Returns\ true\ if\ the\ objects\ are\ equal,\ else\ false.\r\n\ \r\n\ Rules\ for\ equality\r\n\ Same\ name,\ same\ isTall,\ same\ hasThinLongLegs\r\n
+comment4.params=
+comment4.target=boolean\ isTall()
+comment5.params=
+comment5.target=boolean\ hasThinLongLegs()
+numComments=6

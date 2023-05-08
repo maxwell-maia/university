@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=StudentGroup
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ StudentGroup\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=StudentGroup()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ StudentGroup\r\n
+comment2.params=index
+comment2.target=boolean\ removeStudent(int)
+comment3.params=
+comment3.target=int\ numStudents()
+comment4.params=
+comment4.target=void\ listStudents()
+numComments=5

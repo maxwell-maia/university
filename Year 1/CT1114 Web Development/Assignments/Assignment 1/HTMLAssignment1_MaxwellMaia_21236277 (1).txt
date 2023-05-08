@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script>
+  "use strict";
+  function handleClick()
+  {
+  var a = 4;
+  var b = 2;
+  var c = 5;
+  var d = 3;
+ 
+  alert((a+b)*(c+d));
+  alert(a+b*c+d);
+  alert( (d*(a-b))+c );
+  alert(d*a-b+c);
+  }
+ 
+ 
+  </script>
+  </head>
+ 
+  <body>
+    <p id='myParagraph'></p>
+    <button onclick='handleClick();'>Click for result!</button>
+  </body>
+</html>

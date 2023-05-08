@@ -1,0 +1,15 @@
+-- num dependents
+
+
+SELECT COUNT(*) AS 'Emps with Deps'
+FROM employee
+WHERE ssn IN (SELECT essn FROM dependent);
+
+
+-- next
+
+SELECT pno, COUNT(*) AS 'Num Emps'
+FROM works_on
+GROUP BY pno
+HAVING COUNT(*) > 2
+ORDER BY pno;
