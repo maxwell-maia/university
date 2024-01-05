@@ -1,0 +1,203 @@
+timestamp	|	{<p_id, x, y>}		| 	<x, y, z>
+----------------------------------------------------------------------------
+0			{<1   , 56, 22>, ...}           <0, 0, 0>
+1			{<1   , -12, 18>, ...}          <22, 5, -12>
+
+
+
+
+Q1 some ideas
+
+A tuple looks like this
+timestamp	|	{<p_id, x, y>}	| 	<x, y, z>
+
+in this set {<p_id, x, y>} This contains many players and their
+positions. After "- Iterate through all tuples:" we need
+to select the set that has the player that the analyst's
+query asked for? So we need to either iterate the set to
+find the What is the
+Add "for the p_id" of the player that is selected
+
+per player
+index each player?
+index the positions that x is in a certain place?
+
+
+I like the preprocessing. The grid cell is good.
+More detail on grid cell.
+Why does the query require an x, y? I think the query
+the analyst would run has the player id
+and a range of time that they want the heat map for. So the 
+query would be given p_id, heatmap_start_time, heatmap_end_time
+
+
+
+How about
+
+# Q1
+Define the time between each timestamp to be TIMESTAMP_PERIOD.
+## Preprocessing
+- Define grid cells (the pitch is divided into squares of 1 square metre)
+- Define a func timeConv() that converts timestamp into game time.
+  timestamp - > seconds_since_start_of_game
+
+- Iterate through all tuples in the "match file":
+      - Get time = timeConv(timestamp)
+
+      - (We are going to make a B+ tree for every player [for this match]. Do we need to initialize the B+ tree's?)
+
+      - Iterate through all <p_id, x, y> in the set {<p_id, x, y>}
+        For each <p_id, x, y> pLoc in the set {<p_id, x, y>} playerLocations (of this tuple)
+            - Get myPointer = pointerOf(pLoc.x) Pointer to x of the current pLoc. This is the pointer to x in the match file. (Assume y, is stored after x, so really just need a pointer to x to get x and y because y is just the next integer)
+            - Insert into the "p_id" B+ Tree (We are making a B+ tree for every player (there is a b+ tree for every p_id). Insert into the B+ tree for pLoc.p_id)
+              Insert: Key Value = time;
+                      data pointer = myPointer;
+
+              e.g. p_id = 1. Insert: Key Value = 0 (second 0 is the start of game)
+                   and data pointer = pointerOf(pLoc.x) (pointer to x, y of p_id = 1)
+
+Now we have a bunch of B+ tree's. We have a B+ tree for each player that that played in this match.
+The key values are the time of the game in seconds
+The data pointer is the pointer to the player's position at that time
+(Insert picture I sent of B+ tree. Reference: https://www.geeksforgeeks.org/difference-between-b-tree-and-b-tree/). At the leaf level there are
+data pointers that point to the x, y of the player in the original match file
+
+## Query:
+- Define a func that returns the grid cell given an {x, y} pair
+
+- Given p_id, start_time, end_time (Assume that the program
+that calls the query has converted the time into seconds since the
+start of the game OR convert the times into seconds since the start of the game)
+- Open the B+ tree for the p_id
+Note that the key values of the B+ tree are the seconds since the start of the game
+- Linearly step through the leaf nodes, checking the key value until you reach the start time
+- While the key value is less than or equal to the end_time
+    - time = the key value
+    - x = the value at the data pointer stored in the leaf node
+    - y = the next integer (The y is stored right after the x in the original file)
+    - Get the grid cell from the {x, y} using the function defined
+    - Add TIMESTAMP_PEROID (the length of time between timestamps) to the corresponding grid cell in the heatmap, making that spot in the heatmap hotter.
+The heatmap is complete
+
+
+I have chosen a B+ tree because it allows all of the data pointers to be in a singly linked
+list at the leaf nodes. This allows us to use a range query to obtain the location in the original match file of
+all of the x, y's. The query at run time will calculate grid from the positions and create the heatmap.
+
+This approach saves time that would be needed to iterate through all of the player's
+locations throughout the whole match by indexing the locations of each player.
+This costs some time to produce B+ trees for every player but saves a lot of time when querying.
+This approach allows range queries thanks to the B+ tree.
+The cost of this approach is storage necessary for all of the B+ tree indexes.
+
+Comparing to a hashing approach:
+This approach is slower at query time and possibly slower at the pre-processing time because inserting to B+ tree is slower than hashing.
+However the advantage is that range queries can be run using this approach. e.g. The analyst can make a heatmap for a player for minute 35 to 45.
+
+Q2
+For preproccessing
+- Divide the tuples by number of CPU's.
+- Transfer a part of the table into each CPU's memory.
+- Use the same algorithm as before.
+
+
+For Query
+Altered pseudocode for parallelisation
+- Define a func that returns the grid cell given an {x, y} pair
+
+One of the CPU's is the "main CPU" and it distributes the workload:
+- Given p_id, start_time, end_time (Assume that the program
+that calls the query has converted the time into seconds since the
+start of the game OR convert the times into seconds since the start of the game)
+- Open the B+ tree for the p_id
+Note that the key values of the B+ tree are the seconds since the start of the game
+- Linearly step through the leaf nodes, checking the key value until you reach the start time
+- While the key value is less than or equal to the end_time:
+  Use the modulus operator by the number of CPU's you have (excluding this one) to 
+  determine which CPU you should send the information in the current leaf node.
+  Send the CPU the key value and pointer stored in the leaf node.
+  This distributes the workload.
+
+In every other CPU
+- Add the key value and pointer received from the main CPU to a queue
+- While there are items in the queue
+    - time = the key value
+    - x = the value at the data pointer stored in the leaf node
+    - y = the next integer (The y is stored right after the x in the original file)
+    - Get the grid cell from the {x, y} using the function defined
+    - Add TIMESTAMP_PEROID (the length of time between timestamps) to the corresponding grid cell in the heatmap, making that spot in the heatmap hotter.
+
+The main CPU
+- Add the all the heatmaps together to create the final heatmap.
+It is simple to combine the heatmaps because the heatmap could be a 2D array of integers.
+This combining causes some overhead but is still faster than not parallelising.
+There is also overhead in the modulus operation that divides the workload.
+The heatmap is complete when all of the CPU's have completed
+
+
+Q3
+Use the same approach as Q1 with a slightly different query.
+Advantages: Already pre-processed.
+Also allows for range queries.
+
+Query:
+NEW - Define a func that returns the rectangle of the 3x3 grid given the {x, y}
+
+- Given p_id, start_time, end_time (Assume that the program
+that calls the query has converted the time into seconds since the
+start of the game OR convert the times into seconds since the start of the game)
+- Open the B+ tree for the p_id
+Note that the key values of the B+ tree are the seconds since the start of the game
+- Linearly step through the leaf nodes, checking the key value until you reach the start time
+- While the key value is less than or equal to the end_time
+    - time = the key value
+    - x = the value at the data pointer stored in the leaf node
+    - y = the next integer (The y is stored right after the x in the original file)
+NEW    - Get the rectangle of the 3x3 from the {x, y} using the function defined
+CHANGED    - Add TIMESTAMP_PEROID (the length of time between timestamps) to the corresponding rectangle in the heatmap, making that rectangle in the heatmap hotter.
+The 3x3 heatmap is complete
+
+
+Q4
+Use the same approach as Q3 with a different query.
+New pseudocode summary:
+Iterate both players B + trees.
+Get the rectangle they're in
+If Rectangle 1 == Rectangle2
+Make the heatmap hotter.
+
+Advantages: Already pre-processed.
+Also allows for range queries.
+
+Query
+- Define a func that returns the rectangle of the 3x3 grid given the {x, y}
+
+- Given p_id, start_time, end_time (Assume that the program
+that calls the query has converted the time into seconds since the
+start of the game OR convert the times into seconds since the start of the game)
+- Open the B+ tree for the p_id
+- Open the B+ tree for the second p_id
+Note that the key values of the B+ tree are the seconds since the start of the game
+- Linearly step through the leaf nodes (of the first tree), checking the key value until you reach the start time
+- Linearly step through the leaf nodes (of the second tree), checking the key value until you reach the start time
+- Iterating the first and second leaf nodes at the same time.
+NOTE: Assumes both players were on the field for the whole of the specified time.
+- While the key value is less than or equal to the end_time
+      from the first B+ tree:
+    - time1 = the key value
+    - x1 = the value at the data pointer stored in the leaf node
+    - y1 = the next integer (The y is stored right after the x in the original file)
+    - Rectangle1 = Get the rectangle of the 3x3 from the {x, y} using the function defined
+      from the second B+ tree:
+    - time2 = the key value from the second B+ tree
+    - x2 = the value at the data pointer stored in the leaf node
+    - y1 = the next integer (The y is stored right after the x in the original file)
+    - Rectangle2 = Get the rectangle of the 3x3 from the {x, y} using the function defined
+    - If Rectangle 1 == Rectangle2
+    - Add TIMESTAMP_PEROID (the length of time between timestamps) to the corresponding rectangle in the heatmap, making that rectangle in the heatmap hotter.
+The 3x3 heatmap is complete
+
+
+Damn your answer is really good. Well done. I think the lecturer said the analyst may want to choose certain sections of the game to create a heatmap for. I'm not sure if the hashing approach allows that so I made an alternative approach for question 1 and 2 and then kind of shoddily applied it to q3 and q4.
+Use whichever is better. I guess we can include both approaches anyway.
+

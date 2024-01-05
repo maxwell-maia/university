@@ -1,0 +1,85 @@
+#lang racket
+
+;A.
+(provide ins_beg)
+
+(define (ins_beg el lst)
+  (cons el lst))
+
+
+
+;B.
+(provide ins_end)
+
+(define (ins_end el lst)
+  (append lst (list el)))
+
+
+
+;C.
+;returns the number of top-level elements in a list
+(provide cout_top_level)
+
+(define (cout_top_level lst)
+  (if (null? lst)
+      0
+      (+ 1 (cout_top_level (cdr lst)))
+  )
+)
+; example code: (cout_top_level '(2 3 4 6 6 '(2 2))) should return 6
+
+
+
+;D.
+;non-tail recursive function that counts the times an item occurs in a list of items
+(provide count_instances)
+
+(define (count_instances item lst)
+  (if (null? lst)
+      0
+      (if (equal? item (car lst))
+          (+ 1 (count_instances item (cdr lst)))
+          (count_instances item (cdr lst))
+      )
+  )
+)
+;example code: (count_instances 1 '(1 2 3 1 4 5 1 6)) should return 3
+
+
+
+;E.
+;tail recursive function, counts items in a list of items
+(provide count_instances_tr)
+
+(define (count_instances_tr item lst)
+  (count-helper lst item 0)
+)
+
+(define (count-helper lst item count)
+  (cond
+    ((null? lst) count)
+    ((equal? item (car lst)) (count-helper (cdr lst) item (+ 1 count)))
+    (else (count-helper (cdr lst) item count)))
+)
+;example code: (count_instances_tr 1 '(1 2 3 1 4 5 1 6))
+
+
+
+;F.
+;returns the instances of an item in a list, also checking sub-lists in the list
+(provide count_instances_deep)
+
+(define (count_instances_deep el lst)
+  (if (null? lst)
+      0
+      (if (list? (car lst))
+          (+ (count_instances_deep el (car lst)) (count_instances_deep el (cdr lst)))
+           (if (= el (car lst))
+               (+ 1 (count_instances_deep el (cdr lst)))
+               (count_instances_deep el (cdr lst))
+            )
+        )
+   )
+)
+; example code: (count_instances_deep 6 '((1 6 6) 6 7 2 5)) should return 3
+

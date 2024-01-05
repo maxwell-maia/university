@@ -1,0 +1,60 @@
+#lang racket
+
+;A.
+(provide ins_beg)
+
+(define (ins_beg el lst)
+  (cons el lst))
+
+
+;B.
+(provide ins_end)
+
+(define (ins_end el lst)
+  (append lst (list el)))
+
+
+;C.
+;returns the number of top-level elements in a list
+(provide cout_top_level)
+
+(define (cout_top_level lst)
+  (if (null? lst)
+      0
+      (+ 1 (cout_top_level (cdr lst)))
+  )
+)
+; example code: (cout_top_level '(2 3 4 6 6 '(2 2))) should return 6
+
+
+;D.
+
+
+
+
+
+;E.
+
+
+
+
+
+
+;F.
+;returns the instances of an item in a list, also checking sub-lists in the list
+(provide count_instances_deep)
+
+(define (count_instances_deep el lst)
+  (if (null? lst)
+      0
+      (if (list? (car lst))
+          (+ (count_instances_deep el (car lst)) (count_instances_deep el (cdr lst)))
+           (if (= el (car lst))
+               (+ 1 (count_instances_deep el (cdr lst)))
+               (count_instances_deep el (cdr lst))
+            )
+        )
+   )
+)
+; example code: (count_instances_deep 6 '((1 6 6) 6 7 2 5)) should return 3
+
